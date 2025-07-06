@@ -26,14 +26,14 @@
   <div id="quoteDisplay">Click "Show New Quote" to display a quote!</div>
   <button id="newQuote">Show New Quote</button>
 
+  <h3>Filter Quotes by Category</h3>
+  <select id="categoryFilter" onchange="filterQuotes()">
+    <option value="all">All Categories</option>
+    <!-- Dynamically populated categories will go here -->
+  </select>
+
   <h3>Add a New Quote</h3>
   <div id="addQuoteFormContainer"></div> <!-- Placeholder for dynamic form -->
-
-  <!-- Add Export Quotes Button here -->
-  <button id="exportQuotesButton">Export Quotes</button>
-
-  <!-- Add Import Quotes File Input here -->
-  <input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
 
   <script src="script.js"></script>
 </body>
