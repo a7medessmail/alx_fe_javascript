@@ -33,14 +33,35 @@ function syncQuotes(serverQuotes) {
     // If the server has more quotes, replace the localStorage data
     localStorage.setItem('quotes', JSON.stringify(serverQuotes));
     quotes = serverQuotes; // Update the quotes array
-    alert("Data synced successfully with server!");
+    showSyncNotification("Quotes synced with server!");  // Show notification
   } else {
-    alert("Local data is up to date.");
+    showSyncNotification("Local data is up to date.");  // Show notification if local data is up to date
   }
 
   // Re-populate the category filter and display quotes after sync
   populateCategories();
   displayQuotes(quotes);
+}
+
+// Function to display notification for sync success or failure
+function showSyncNotification(message) {
+  const notification = document.createElement("div");
+  notification.textContent = message;
+  notification.style.position = "fixed";
+  notification.style.top = "20px";
+  notification.style.left = "50%";
+  notification.style.transform = "translateX(-50%)";
+  notification.style.backgroundColor = "#28a745"; // Green color for success
+  notification.style.color = "white";
+  notification.style.padding = "10px 20px";
+  notification.style.borderRadius = "5px";
+  notification.style.fontSize = "16px";
+  document.body.appendChild(notification);
+
+  // Remove notification after 3 seconds
+  setTimeout(() => {
+    notification.remove();
+  }, 3000);
 }
 
 // Function to populate categories dynamically
