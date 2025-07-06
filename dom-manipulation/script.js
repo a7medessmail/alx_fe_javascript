@@ -45,22 +45,13 @@ function syncQuotes(serverQuotes) {
 
 // Function to display notification for sync success or failure
 function showSyncNotification(message) {
-  const notification = document.createElement("div");
+  const notification = document.getElementById("notification");
   notification.textContent = message;
-  notification.style.position = "fixed";
-  notification.style.top = "20px";
-  notification.style.left = "50%";
-  notification.style.transform = "translateX(-50%)";
-  notification.style.backgroundColor = "#28a745"; // Green color for success
-  notification.style.color = "white";
-  notification.style.padding = "10px 20px";
-  notification.style.borderRadius = "5px";
-  notification.style.fontSize = "16px";
-  document.body.appendChild(notification);
+  notification.style.display = 'block';
 
   // Remove notification after 3 seconds
   setTimeout(() => {
-    notification.remove();
+    notification.style.display = 'none';
   }, 3000);
 }
 
@@ -183,6 +174,12 @@ async function postDataToServer() {
   }
 }
 
+// Function to show a random quote
+function showRandomQuote() {
+  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+  displayQuotes([randomQuote]);
+}
+
 // Call loadQuotes() when the page loads to get stored quotes
 loadQuotes();
 
@@ -194,3 +191,6 @@ fetchQuotesFromServer();
 
 // Periodically check for new quotes every 10 seconds
 setInterval(fetchQuotesFromServer, 10000); // Fetch every 10 seconds
+
+// Add event listener to "Show New Quote" button
+document.getElementById("newQuote").addEventListener("click", showRandomQuote);
