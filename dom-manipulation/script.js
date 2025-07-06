@@ -5,19 +5,23 @@ let quotes = [
   { text: "Get busy living, or get busy dying.", category: "Motivation" }
 ];
 
-// Function to simulate server interaction and fetch quotes periodically
-function fetchQuotesFromServer() {
-  // Simulating fetching data from the server using JSONPlaceholder or a mock API
-  // For the sake of this example, we'll simulate it with setTimeout
-  setTimeout(() => {
-    const serverQuotes = [
-      { text: "Success is not final, failure is not fatal: It is the courage to continue that counts.", category: "Motivation" },
-      { text: "Don’t cry because it’s over, smile because it happened.", category: "Life" }
-    ];
+// Function to simulate server interaction and fetch quotes periodically using mock API
+async function fetchQuotesFromServer() {
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const serverQuotes = await response.json();
+    
+    // Transform mock API data into our quote structure
+    const formattedServerQuotes = serverQuotes.slice(0, 5).map(post => ({
+      text: post.title,  // Using post title as quote text
+      category: "General"  // Mock category
+    }));
 
     // Call the syncData function to update localStorage with the server data
-    syncDataWithServer(serverQuotes);
-  }, 2000); // Simulating server delay
+    syncDataWithServer(formattedServerQuotes);
+  } catch (error) {
+    console.error("Error fetching data from server:", error);
+  }
 }
 
 // Function to sync localStorage data with server data
