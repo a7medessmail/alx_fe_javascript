@@ -52,6 +52,9 @@
   <!-- Export Quotes Button -->
   <button onclick="exportQuotes()">Export Quotes</button>
 
+  <!-- Import Quotes File Input -->
+  <input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
+
   <!-- Notification area -->
   <div id="notification">Quotes synced with server!</div>
 
