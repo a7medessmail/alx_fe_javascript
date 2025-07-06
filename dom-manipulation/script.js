@@ -5,6 +5,40 @@ let quotes = [
   { text: "Get busy living, or get busy dying.", category: "Motivation" }
 ];
 
+// Function to simulate server interaction and fetch quotes periodically
+function fetchQuotesFromServer() {
+  // Simulating fetching data from the server using JSONPlaceholder or a mock API
+  // For the sake of this example, we'll simulate it with setTimeout
+  setTimeout(() => {
+    const serverQuotes = [
+      { text: "Success is not final, failure is not fatal: It is the courage to continue that counts.", category: "Motivation" },
+      { text: "Don’t cry because it’s over, smile because it happened.", category: "Life" }
+    ];
+
+    // Call the syncData function to update localStorage with the server data
+    syncDataWithServer(serverQuotes);
+  }, 2000); // Simulating server delay
+}
+
+// Function to sync localStorage data with server data
+function syncDataWithServer(serverQuotes) {
+  const localQuotes = JSON.parse(localStorage.getItem('quotes')) || [];
+
+  // Simulate conflict resolution: server data takes precedence
+  if (serverQuotes.length > localQuotes.length) {
+    // If the server has more quotes, replace the localStorage data
+    localStorage.setItem('quotes', JSON.stringify(serverQuotes));
+    quotes = serverQuotes; // Update the quotes array
+    alert("Data synced successfully with server!");
+  } else {
+    alert("Local data is up to date.");
+  }
+
+  // Re-populate the category filter and display quotes after sync
+  populateCategories();
+  displayQuotes(quotes);
+}
+
 // Function to populate categories dynamically
 function populateCategories() {
   const categoryFilter = document.getElementById("categoryFilter");
@@ -95,3 +129,6 @@ loadQuotes();
 
 // Call populateCategories() to populate dropdown with categories
 populateCategories();
+
+// Call fetchQuotesFromServer() to simulate fetching data from the server
+fetchQuotesFromServer();
