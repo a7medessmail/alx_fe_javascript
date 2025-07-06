@@ -19,6 +19,18 @@
       padding: 10px;
       margin: 10px;
     }
+    #notification {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #28a745; /* Green color */
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -33,7 +45,15 @@
   </select>
 
   <h3>Add a New Quote</h3>
-  <div id="addQuoteFormContainer"></div> <!-- Placeholder for dynamic form -->
+  <input type="text" id="newQuoteText" placeholder="Enter a new quote" />
+  <input type="text" id="newQuoteCategory" placeholder="Enter quote category" />
+  <button onclick="addQuote()">Add Quote</button>
+
+  <!-- Export Quotes Button -->
+  <button onclick="exportQuotes()">Export Quotes</button>
+
+  <!-- Notification area -->
+  <div id="notification">Quotes synced with server!</div>
 
   <script src="script.js"></script>
 </body>
