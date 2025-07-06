@@ -170,3 +170,6 @@ populateCategories();
 
 // Call fetchQuotesFromServer() to simulate fetching data from the server
 fetchQuotesFromServer();
+
+// Periodically check for new quotes every 10 seconds
+setInterval(fetchQuotesFromServer, 10000); // Fetch every 10 seconds
