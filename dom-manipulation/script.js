@@ -191,6 +191,24 @@ function exportQuotes() {
   link.click();
 }
 
+// Function to import quotes from a JSON file
+function importFromJsonFile(event) {
+  const fileReader = new FileReader();
+  fileReader.onload = function(e) {
+    try {
+      const importedQuotes = JSON.parse(e.target.result);
+      quotes = importedQuotes;  // Update the quotes array with imported data
+      saveQuotes();  // Save the imported quotes to localStorage
+      populateCategories();  // Re-populate categories dropdown
+      displayQuotes(quotes);  // Display the imported quotes
+      alert('Quotes imported successfully!');
+    } catch (error) {
+      alert('Error importing quotes. Please make sure the file is a valid JSON format.');
+    }
+  };
+  fileReader.readAsText(event.target.files[0]);
+}
+
 // Call loadQuotes() when the page loads to get stored quotes
 loadQuotes();
 
