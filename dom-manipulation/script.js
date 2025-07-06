@@ -17,15 +17,15 @@ async function fetchQuotesFromServer() {
       category: "General"  // Mock category
     }));
 
-    // Call the syncData function to update localStorage with the server data
-    syncDataWithServer(formattedServerQuotes);
+    // Call the syncQuotes function to update localStorage with the server data
+    syncQuotes(formattedServerQuotes);
   } catch (error) {
     console.error("Error fetching data from server:", error);
   }
 }
 
 // Function to sync localStorage data with server data
-function syncDataWithServer(serverQuotes) {
+function syncQuotes(serverQuotes) {
   const localQuotes = JSON.parse(localStorage.getItem('quotes')) || [];
 
   // Simulate conflict resolution: server data takes precedence
