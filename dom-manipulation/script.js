@@ -128,6 +128,40 @@ function loadQuotes() {
   }
 }
 
+// Function to post data to the server using a mock API
+async function postDataToServer() {
+  const url = 'https://jsonplaceholder.typicode.com/posts'; // Mock API
+
+  // Prepare data to be sent to the server (for example, a new quote)
+  const newQuote = {
+    title: "This is a new quote", // Example text for new quote
+    body: "This is a body of the new quote",
+    userId: 1, // Mock user ID
+  };
+
+  try {
+    // Send data to the server using POST with proper headers
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newQuote), // Convert object to JSON string
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to post data');
+    }
+
+    const data = await response.json();
+    console.log('Data posted successfully:', data);
+    alert('Quote posted successfully!');
+  } catch (error) {
+    console.error('Error posting data:', error);
+    alert('There was an error posting the quote.');
+  }
+}
+
 // Call loadQuotes() when the page loads to get stored quotes
 loadQuotes();
 
