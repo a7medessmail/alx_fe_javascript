@@ -38,8 +38,11 @@ function filterQuotes() {
   // Filter quotes based on the selected category
   const filteredQuotes = selectedCategory === "all" ? quotes : quotes.filter(quote => quote.category === selectedCategory);
   
-  // Display the filtered quotes
-  displayQuotes(filteredQuotes);
+  // Select a random quote from the filtered quotes
+  const randomQuote = filteredQuotes[Math.floor(Math.random() * filteredQuotes.length)];
+  
+  // Display the random quote
+  displayQuotes([randomQuote]);
 }
 
 // Function to display quotes
