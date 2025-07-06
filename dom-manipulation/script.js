@@ -174,6 +174,23 @@ async function postDataToServer() {
   }
 }
 
+// Function to export quotes as a JSON file
+function exportQuotes() {
+  // Convert quotes array to JSON
+  const quotesJSON = JSON.stringify(quotes, null, 2);
+
+  // Create a Blob from the JSON string
+  const blob = new Blob([quotesJSON], { type: 'application/json' });
+
+  // Create a link element for downloading
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'quotes.json'; // The name of the file
+
+  // Programmatically click the link to trigger the download
+  link.click();
+}
+
 // Call loadQuotes() when the page loads to get stored quotes
 loadQuotes();
 
